@@ -1,0 +1,72 @@
+@startuml
+
+class SupermarketManager{
+- productsInStock : List<Product>
++ getStatusOfGoods() : void
++ getNumberOfSourMilk() : int
+}
+
+abstract class Product{
+- productType : ProductType
+- name : String
+- id : UUID
+- quantity : int
+}
+
+class Milk extends Product{
+- expirationDate : Date
+- milkType : MilkType
+- int expirationYear;
+- int expirationMonth;
+- int expirationDay;
+
+}
+
+class Date {
+- int year;
+- int month;
+- int day;
+}
+
+class Shovel extends Product{
+- shovelDimension : ShovelDimension
+- shovelMaterial : ShovelMaterial
+}
+
+class Truck extends Product{
+- numberOfWheels : int
+}
+
+enum ShovelDimension{
+SMALL,
+NORMAL,
+BIG
+}
+
+enum ShovelMaterial{
+ALLUMINIUM,
+STEEL,
+PLASTIC
+}
+
+enum MilkType{
+LONG_LASTING,
+REGULAR
+}
+interface ExpirationChecker{
++ isExpired(Milk) : boolean
+}
+
+enum ProductType{
+SHOVEL,
+TRUCK,
+MILK
+}
+
+Product -- ProductType
+Milk -- MilkType
+Shovel -- ShovelMaterial
+Shovel -- ShovelDimension
+SupermarketManager --> Product
+Milk --> Date
+@enduml
